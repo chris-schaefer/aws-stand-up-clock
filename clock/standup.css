@@ -1,0 +1,52 @@
+:root {
+    --clock-color: #2AF;
+}
+
+body{
+	text-align: center;
+    font-family: sans-serif;
+    background-color: #eee;
+}
+
+h1 {
+	font-size:120px;
+    margin:0;
+    padding:0;
+}
+
+h2 {
+	padding:20px;
+	font-size:40px;
+}
+
+#clockdiv {
+	color: #000;
+	display: inline-block;
+	text-align: center;
+	font-size: 140px;
+}
+
+#clockdiv > div {
+	padding: 15px;
+	border-radius: 20px;
+	background: var(--clock-color);
+	display: inline-block;
+}
+
+div.member {
+	display:block;
+    height:200px;
+}
+
+div.lastMember {
+	display:block;
+    height:60px;
+}
+
+div.logo {
+	display:block;
+    height:160px;
+	padding: 20px;
+	margin-top: 80px;
+	background: var(--clock-color);
+}

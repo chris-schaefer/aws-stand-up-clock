@@ -1,0 +1,41 @@
+Description: Static webhosting for standup clock
+
+Parameters:
+  BucketName:
+    Type: String
+  SourceIP:
+    Type: String
+    Default: '0.0.0.0/0'
+
+Resources:
+  RootBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      BucketName: !Ref BucketName
+
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      PolicyDocument:
+        Id: PublicReadForGetBucketObjects
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Sub 'arn:aws:s3:::${RootBucket}/*'
+            Condition:
+              IpAddress:
+                'aws:SourceIp':
+                  - !Ref SourceIP
+      Bucket: !Ref RootBucket
+
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt
+      - RootBucket
+      - WebsiteURL
+    Description: URL for website hosted on S3
